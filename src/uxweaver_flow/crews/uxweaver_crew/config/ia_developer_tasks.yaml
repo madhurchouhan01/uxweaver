@@ -1,0 +1,13 @@
+ia_developer_task:
+  description: >
+    Generate a valid Mermaid diagram for Information Architecture,
+    based on the strategy output from the previous step. Ensure the syntax is error-free and ready for rendering.
+    input:
+      strategies: {strategies}
+
+  expected_output: >
+    Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
+    Do not wrap the diagram in any symbols, tags, or extra characters. 
+    Your output must begin directly with: graph TD
+
+  agent: ia_developer_agent

@@ -1,0 +1,67 @@
+digraph {
+	Homepage
+	"Account Management"
+	Homepage -> "Account Management"
+	"Book a Trip"
+	Homepage -> "Book a Trip"
+	About
+	Homepage -> About
+	Destination
+	Homepage -> Destination
+	"Customer Service"
+	Homepage -> "Customer Service"
+	"Travel Tips"
+	Homepage -> "Travel Tips"
+	"Sign Up"
+	"Account Management" -> "Sign Up"
+	Login
+	"Account Management" -> Login
+	"Profile Settings"
+	"Account Management" -> "Profile Settings"
+	"Modify Reservation"
+	"Account Management" -> "Modify Reservation"
+	"Cancel Reservation"
+	"Account Management" -> "Cancel Reservation"
+	"Write Reviews"
+	"Account Management" -> "Write Reviews"
+	"Book a Trip" -> "Travel Details"
+	"Travel Details" -> "Reservation Process"
+	"Reservation Process" -> "Payment Options"
+	"Payment Options" -> Confirmation
+	About -> "Company Description"
+	About -> "Connect via Social Media"
+	About -> Careers
+	About -> Policies
+	Destination -> "Sort by Time Period"
+	Destination -> "Sort by Country"
+	Destination -> "Sort by Activity"
+	Destination -> "Sort by Price"
+	Destination -> "Sort by Length of Stay"
+	Destination -> "Sort by Reviews"
+	"Sort by Activity" -> Architecture
+	"Sort by Activity" -> Art
+	"Sort by Activity" -> Entertainment
+	"Sort by Activity" -> History
+	"Sort by Activity" -> Inventions
+	"Sort by Activity" -> Religion
+	"Sort by Activity" -> Science
+	"Sort by Activity" -> Sports
+	"Sort by Activity" -> Music
+	"Sort by Country" -> "North America"
+	"Sort by Country" -> "South America"
+	"Sort by Country" -> Africa
+	"Sort by Country" -> Europe
+	"Sort by Country" -> Asia
+	"Sort by Country" -> Antarctica
+	"Sort by Country" -> Australasia
+	"Sort by Time Period" -> Prehistory
+	"Sort by Time Period" -> "Ancient History"
+	"Sort by Time Period" -> "Middle Ages"
+	"Sort by Time Period" -> "Modern History"
+	"Customer Service" -> "Chat with Us"
+	"Customer Service" -> "Contact Information"
+	"Travel Tips" -> "General Travel"
+	"Travel Tips" -> "Health Concerns"
+	"Travel Tips" -> "Safety Measures"
+	"Travel Tips" -> FAQs
+}

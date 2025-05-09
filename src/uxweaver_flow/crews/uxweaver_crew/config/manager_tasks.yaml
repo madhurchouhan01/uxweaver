@@ -1,0 +1,47 @@
+manager_task:
+  description: >
+    Synthesize a product idea or requirement into a comprehensive UX architecture based on five pillars:
+    1. Product Foundations – Define the product vision, target user personas, business goals, core user needs, and success metrics.
+    2. UX Structural Planning – Specify primary modules, feature hierarchies, navigation systems, and page types by user role.
+    3. Interaction & Flow Design – Map key task flows, state transitions, feedback mechanisms, and microinteractions.
+    4. UI & Visual Direction – Recommend design tokens, reusable components, visual style guidelines, and accessibility standards.
+    5. Validation & Feedback Strategy – Outline prototyping methods, user testing plans, and analytics hooks for UX validation.
+    For each core screen/page, provide:
+      - User pain point solved
+      - Functional summary
+      - Technical rationale
+      - User-centered behavioral value
+    Collaborate with the Team Leader Agent to refine requirements and the Developer Agent to ensure technical feasibility. Handle incomplete inputs by making reasonable assumptions (documented in the output) and validate JSON output for correctness.
+ 
+    input:
+    {requirements}
+      raw_instructions: >
+        A product idea, concept note, or PRD describing the product’s intent, features, target users, and context. The input should include:
+          - Product purpose and goals
+          - Target audience or user personas
+          - Key features or functionality
+          - Business objectives or success metrics
+        If any details are missing, note assumptions in the output.
+      type: >
+        Text 
+
+ 
+  expected_output: >
+    A valid JSON object adhering to the following schema:
+    {
+      "core_pages": [
+        {
+          "page": "String page name",
+          "pain_point": "String describing user problem",
+          "description": "String summarizing functionality and layout",
+          "technical_rationale": "String explaining system-level need",
+          "user_rationale": "String explaining how this module improves the user experience and addresses their needs"
+        },
+        ...,
+        ...,
+        ...
+      ]
+    }
+    The output must be well-formed JSON, validated for completeness before delivery.
+ 
+  agent: manager_agent
