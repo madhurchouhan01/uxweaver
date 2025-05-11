@@ -1,13 +1,22 @@
 uf_developer_task:
   description: >
-    Generate a valid Mermaid diagram for user flow,
-    based on the strategy output from the previous step. Ensure the syntax is error-free and ready for rendering.
+    Combine and Generate a valid Mermaid diagram for information architecture,based on the mermaids provided. 
+    Ensure the syntax is error-free and ready for rendering.
     input:
-      strategies: {strategies}
-
+      mermaids: {mermaids}
+      metadata : {metadata}
+      example input :
+          {
+    "page_0": "graph TD\n  A[Username Input Field] --> B[Password Input Field]\n  B --> C[Login Button]\n  C --> D[System validates credentials]\n  D -->|Valid credentials| E[System authenticates user]\n  E --> F[System redirects to task list page]\n  D -->|Invalid credentials| G[Error Message Display]\n  C --> H[Forgot Password Link]\n  C --> I[Registration Link]",
+    
+    "page_1": "graph TD\n  A[Task Title Input] --> B[Task Description Input]\n  B --> C[Due Date Picker]\n  C --> D[Assignee Selector]\n  D --> E[Priority Level Selector]\n  E --> F[Task Form]\n  F -->|Submit| G[System validates input data]\n  G -->|Valid| H[System saves task to database]\n  H --> I[System updates Task List]\n  I --> J[User views updated Task List]\n  G -->|Invalid| K[Show Error Message]\n  A --> L[Task List]\n  L --> M[User selects task to view details]\n  M --> N[User views task details]\n  C -->|Selected Date| P[System formats due date]\n  P --> Q[System saves due date]\n  D -->|Selected Assignee| R[System assigns task]\n  R --> S[System notifies assignee]\n  E -->|Selected Priority| T[System sets priority level]\n  T --> U[System updates task priority]",
+    
+    "page_2": "graph TD\n  A[User loads Profile View page] --> B[System displays Profile Header and Details]\n  B --> C[User navigates to Task Overview]\n  C --> D[System displays Task Overview]\n  D --> E[User navigates to Task List]\n  E --> F[System displays Task List]\n  C -->|Back| B\n  E -->|Back| B\n  A1[Profile Header] --> B\n  A2[Profile Details] --> B\n  B1[Task Overview] --> D\n  B2[Task List] --> F"
+    }
   expected_output: >
     Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
     Do not wrap the diagram in any symbols, tags, or extra characters. 
     Your output must begin directly with: graph TD
+    
 
   agent: uf_developer_agent

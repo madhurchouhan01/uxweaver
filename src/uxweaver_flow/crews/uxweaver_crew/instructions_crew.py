@@ -3,7 +3,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from pydantic import BaseModel
 from typing import List
-
+from crewai import LLM
 class ManagerOutput(BaseModel):
     page_title: str
     description : str
@@ -14,6 +14,38 @@ class ManagerOutput(BaseModel):
 class ManagerOutputList(BaseModel):
     core_pages : List[ManagerOutput]
 
+
+llm = LLM(model="groq/meta-llama/llama-4-scout-17b-16e-instruct")
+@CrewBase
+class Demo:
+    agents: List[BaseAgent]
+    tasks: List[Task]
+    agents_config = "config/demo_agents.yaml"
+    tasks_config = "config/demo_tasks.yaml"
+
+    @agent
+    def demo_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config["demo_agent"], 
+            llm=llm,
+        )
+
+    @task
+    def demo_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["demo_task"], 
+        )
+
+    @crew
+    def crew(self) -> Crew:
+
+        return Crew(
+            agents=self.agents, 
+            tasks=self.tasks, 
+            process=Process.sequential,
+            verbose=True,
+
+        )
 
 @CrewBase
 class ManagerCrew:
@@ -50,27 +82,14 @@ class Component(BaseModel):
     name: str
     description: str
 
-
-class DesignStrategy(BaseModel):
-    component: str
-    strategy: str
-    rationale: str
-
-
 class InformationFlow(BaseModel):
     description: str
     sequence: List[str]
 
 
-class UserStory(BaseModel):
-    text: str  
-    alignment: str
-
 class TeamLeadOutput(BaseModel):
     components: List[Component]
-    design_strategies: List[DesignStrategy]
     information_flow: InformationFlow
-    user_story: UserStory
 
 @CrewBase
 class TeamLeaderCrew:
@@ -89,7 +108,7 @@ class TeamLeaderCrew:
     def team_leader_task(self) -> Task:
         return Task(
             config=self.tasks_config["team_leader_task"],  
-            output_pydantic=TeamLeadOutput,
+            output_json=TeamLeadOutput,
         )
 
     @crew

@@ -4,7 +4,6 @@ team_leader_task :
     1. Break the feature(page) into sub-components and describe each.
     2. Propose a design strategy for each sub-component to address the pain point.
     3. Define the information flow between sub-components (e.g., data exchange, dependencies).
-    4. Create a user story aligned with the feature and pain point.
 
     Outputs must align with the Manager Agent’s UX strategy (provided in `input_context`) and be consumable by the Developer Agent for implementation. 
  
@@ -35,10 +34,6 @@ team_leader_task :
             "description": "String describing data exchange or dependencies",
             "sequence": ["Array of steps or interactions between components"]
           },
-          "user_story": {
-            "text": "String in format: 'As a [user], I want [functionality], so that [benefit]'",
-            "alignment": "String explaining how it addresses the pain point"
-          }
         }
       example: >
         {
@@ -50,88 +45,7 @@ team_leader_task :
             "description": "Task Form submits data to Assignee Selector, which updates task assignment",
             "sequence": ["User enters task details", "User selects assignee", "System saves task"]
           },
-          "user_story": {
-            "text": "As a project manager, I want to create tasks quickly, so that I can assign work efficiently.",
-            "alignment": "Addresses slow task assignment by streamlining input and selection"
-          }
         }
   agent: team_leader_agent
 
 
-# team_leader_task :
-#   description: >
-#     For a given feature and pain point, perform the following:
-#     1. Break the feature(page) into sub-components and describe each.
-#     2. Propose a design strategy for each sub-component to address the pain point.
-#     3. Define the information flow between sub-components (e.g., data exchange, dependencies).
-#     4. Create a user story aligned with the feature and pain point.
-
-#     Outputs must align with the Manager Agent’s UX strategy (provided in `input_context`) and be consumable by the Developer Agent for implementation. 
- 
-#     input:
-#     {page_info}
-#       type: json
-#       schema: >
-#         {
-#           "page": "String page name",
-#           "pain_point": "String describing user problem",
-#           "description": "String summarizing functionality and layout",
-#           "technical_rationale": "String explaining system-level need",
-#           "user_rationale": "String explaining behavioral/emotional value"
-#         }
-      
- 
-#   expected_output: >
-#       type: json
-#       schema: >
-#         {
-#           "components": [
-#             {
-#               "name": "String component name",
-#               "description": "String describing the component’s purpose"
-#             }
-#           ],
-#           "design_strategies": [
-#             {
-#               "component": "String component name",
-#               "strategy": "String describing design approach to address pain point",
-#               "rationale": "String explaining alignment with pain point and context"
-#             }
-#           ],
-#           "information_flow": {
-#             "description": "String describing data exchange or dependencies",
-#             "sequence": ["Array of steps or interactions between components"]
-#           },
-#           "user_story": {
-#             "text": "String in format: 'As a [user], I want [functionality], so that [benefit]'",
-#             "alignment": "String explaining how it addresses the pain point"
-#           }
-#         }
-#       example: >
-#         {
-#           "components": [
-#             { "name": "Task Form", "description": "Form for entering task details" },
-#             { "name": "Assignee Selector", "description": "Dropdown for selecting team members" }
-#           ],
-#           "design_strategies": [
-#             {
-#               "component": "Task Form",
-#               "strategy": "Simplify input fields to essential data (title, deadline)",
-#               "rationale": "Reduces cognitive load for quick task creation"
-#             },
-#             {
-#               "component": "Assignee Selector",
-#               "strategy": "Pre-populate with frequent assignees",
-#               "rationale": "Speeds up selection for common team members"
-#             }
-#           ],
-#           "information_flow": {
-#             "description": "Task Form submits data to Assignee Selector, which updates task assignment",
-#             "sequence": ["User enters task details", "User selects assignee", "System saves task"]
-#           },
-#           "user_story": {
-#             "text": "As a project manager, I want to create tasks quickly, so that I can assign work efficiently.",
-#             "alignment": "Addresses slow task assignment by streamlining input and selection"
-#           }
-#         }
-#   agent: team_leader_agent

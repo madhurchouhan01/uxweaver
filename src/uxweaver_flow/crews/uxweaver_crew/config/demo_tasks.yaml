@@ -1,0 +1,19 @@
+demo_task:
+  description: >
+    Parse the user requirement and extract all relevant UX flow data into a clean Python dictionary.
+    input:
+    requirement: {requirements}
+
+  expected_output: >
+    Output must be a valid Python dictionary with the following keys:
+
+    pages: List of page names involved (in order of appearance or navigation).
+
+    transitions: List of transitions between pages (from → to → condition if any).
+
+    actions: List of user actions required (e.g., login, submit task, delete).
+
+    components_per_page: Dictionary mapping each page name to a list of its visible UI components or sections (e.g., input field, task card, button).
+
+    data_entities: List of data entities involved (e.g., user, task) and fields per entity.
+

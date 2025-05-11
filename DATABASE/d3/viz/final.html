@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication Information Architecture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            text-align: left;
+        }
+        
+        .header-right {
+            text-align: right;
+        }
+        
+        h1 {
+            color: #555;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .date {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .home-box {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .utility-nav {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .utility-button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: 1px solid #333;
+            background-color: #fff;
+        }
+        
+        .highlight {
+            background-color: #ffeb3b;
+        }
+        
+        .global-nav {
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-item {
+            background-color: #0d47a1;
+            color: white;
+            padding: 15px;
+            margin: 5px;
+            text-align: center;
+            flex: 1;
+            font-weight: bold;
+        }
+        
+        .content-section {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .content-left {
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .content-right {
+            flex: 1;
+            margin-left: 20px;
+        }
+        
+        .box {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px;
+            text-align: center;
+            width: calc(33.33% - 12px);
+            box-sizing: border-box;
+        }
+        
+        .feature-box {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .yellow-box {
+            background-color: #fffde7;
+            border: 1px solid #e6ee9c;
+        }
+        
+        .tabs-section {
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .tab {
+            display: inline-block;
+            background-color: #fffde7;
+            border: 1px solid #e6ee9c;
+            padding: 10px 15px;
+            margin: 5px;
+            position: relative;
+        }
+        
+        .tab::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .legend {
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .legend-items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+        
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .blue-box {
+            background-color: #0d47a1;
+        }
+        
+        .white-box {
+            background-color: #fff;
+        }
+        
+        .footer {
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-left">
+                <h1>INFO ARCHITECTURE 1.0</h1>
+                <div class="date">User Authentication System</div>
+                <div class="date">May 11, 2025</div>
+            </div>
+            <div class="header-right">
+                <div class="home-box">HOME</div>
+            </div>
+        </div>
+        
+        <!-- Utility Navigation -->
+        <div class="utility-nav">
+            <div class="utility-button">My Account</div>
+            <div class="utility-button">Help Center</div>
+            <div class="utility-button highlight">Sign Up / Login</div>
+        </div>
+        
+        <!-- Global Navigation -->
+        <div class="global-nav">
+            <div class="nav-item">Login</div>
+            <div class="nav-item">Registration</div>
+            <div class="nav-item">Forgot Password</div>
+            <div class="nav-item">Account Settings</div>
+            <div class="nav-item">Two-Factor Authentication</div>
+        </div>
+        
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <!-- Left Side - Components -->
+            <div class="content-left">
+                <!-- Login Page Components -->
+                <div class="box yellow-box">Username Input Field</div>
+                <div class="box yellow-box">Password Input Field</div>
+                <div class="box yellow-box">Login Button</div>
+                <div class="box">Forgot Password Link</div>
+                <div class="box">Registration Link</div>
+                <div class="box">Error Message Display</div>
+                
+                <!-- Registration Page Components -->
+                <div class="box">Header Section</div>
+                <div class="box yellow-box">Registration Form</div>
+                <div class="box">Terms and Conditions</div>
+                <div class="box">Error Handling</div>
+                <div class="box">Footer Section</div>
+                <div class="box">Email Verification</div>
+                
+                <!-- Forgot Password Components -->
+                <div class="box">Email Input Field</div>
+                <div class="box yellow-box">Password Recovery Button</div>
+                <div class="box">Verification Code Field</div>
+                <div class="box">New Password Field</div>
+                <div class="box">Confirmation Field</div>
+                <div class="box">Error Message Display</div>
+                
+                <!-- Account Settings Components -->
+                <div class="box yellow-box">Profile Information Form</div>
+                <div class="box">Account Settings Panel</div>
+                <div class="box">Password Change Form</div>
+                <div class="box">Notification Preferences</div>
+                <div class="box">Account Deletion</div>
+                <div class="box">Data Privacy Settings</div>
+                
+                <!-- Two-Factor Authentication Components -->
+                <div class="box">Authenticator Method Selector</div>
+                <div class="box yellow-box">Setup Instructions</div>
+                <div class="box">Verification Code Input</div>
+                <div class="box">Security Settings Overview</div>
+                <div class="box">Backup Codes</div>
+                <div class="box">Recovery Options</div>
+            </div>
+            
+            <!-- Right Side - Features -->
+            <div class="content-right">
+                <div class="feature-box">Security Features</div>
+                <div class="feature-box">User Preferences</div>
+                <div class="feature-box">Account Types</div>
+                <div class="feature-box">Profile Customization</div>
+            </div>
+        </div>
+        
+        <!-- Tabs Section -->
+        <div class="tabs-section">
+            <div class="tab">Personal Accounts</div>
+            <div class="tab">Business Accounts</div>
+            <div class="tab">Admin Portal</div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">LEGEND</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-box blue-box"></div>
+                    <span>Core Page</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box white-box"></div>
+                    <span>Secondary Page</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box yellow-box"></div>
+                    <span>Key Component</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-title">FOOTER NAVIGATION</div>
+            <div class="footer-links">
+                <div class="footer-link">Privacy Policy</div>
+                <div class="footer-link">Terms of Service</div>
+                <div class="footer-link">Contact Support</div>
+                <div class="footer-link">About Us</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

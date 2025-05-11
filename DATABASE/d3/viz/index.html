@@ -1,0 +1,379 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1700" style="font-family: Arial, sans-serif;">
+  <!-- Definitions -->
+  <defs>
+    <!-- Box styles -->
+    <style type="text/css">
+      .main-module { fill: #2c3e50; stroke: #34495e; stroke-width: 1.5px; }
+      .main-module-text { fill: white; font-weight: bold; }
+      .submodule { fill: #5d8aa8; stroke: #34495e; stroke-width: 1px; }
+      .submodule-text { fill: white; font-weight: bold; }
+      .feature { fill: #f7dc6f; stroke: #d4ac0d; stroke-width: 1px; }
+      .feature-text { fill: #333; }
+      .special-box { fill: #e8e8e8; stroke: #34495e; stroke-width: 1.5px; }
+      .special-text { fill: #333; font-weight: bold; }
+      .note { fill: #f5f5f5; stroke: #d3d3d3; stroke-width: 1px; }
+      .note-text { fill: #666; font-style: italic; }
+    </style>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- Title and Header -->
+  <g id="header">
+    <rect x="50" y="25" width="380" height="60" rx="0" ry="0" class="special-box" />
+    <text x="70" y="55" font-size="18" font-weight="bold">INFO ARCHITECTURE 1.0</text>
+    <text x="70" y="75" font-size="14">Elder Healthcare Platform</text>
+    <text x="330" y="75" font-size="12" text-anchor="end">May 11, 2025</text>
+  </g>
+
+  <!-- Home Section -->
+  <g id="home">
+    <rect x="480" y="35" width="100" height="40" rx="0" ry="0" class="main-module" />
+    <text x="530" y="60" font-size="14" text-anchor="middle" class="main-module-text">HOME</text>
+  </g>
+
+  <!-- Utility Navigation -->
+  <g id="utility-nav">
+    <rect x="630" y="25" width="410" height="60" rx="0" ry="0" class="special-box" />
+    <text x="1030" y="45" font-size="12" text-anchor="end" font-weight="bold">UTILITY NAVIGATION</text>
+    
+    <rect x="640" y="50" width="100" height="25" rx="0" ry="0" stroke="#000" fill="#fff" stroke-width="1" />
+    <text x="690" y="67" font-size="12" text-anchor="middle">My Profile</text>
+    
+    <rect x="750" y="50" width="100" height="25" rx="0" ry="0" stroke="#000" fill="#fff" stroke-width="1" />
+    <text x="800" y="67" font-size="12" text-anchor="middle">Contact Support</text>
+    
+    <rect x="860" y="50" width="170" height="25" rx="0" ry="0" stroke="#000" fill="#f7dc6f" stroke-width="1" />
+    <text x="945" y="67" font-size="12" text-anchor="middle">Emergency (caregiver only)</text>
+  </g>
+
+  <!-- Global Navigation -->
+  <g id="global-nav">
+    <rect x="390" y="115" width="320" height="25" rx="0" ry="0" class="special-box" fill="none" />
+    <text x="550" y="132" font-size="12" text-anchor="middle" font-weight="bold">GLOBAL NAVIGATION</text>
+  </g>
+
+  <!-- Main modules -->
+  <g id="main-modules">
+    <!-- Module 1: Health Dashboard -->
+    <rect x="70" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="145" y="175" font-size="14" text-anchor="middle" class="main-module-text">Health Dashboard</text>
+    
+    <!-- Module 2: Emergency Alerts -->
+    <rect x="230" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="305" y="175" font-size="14" text-anchor="middle" class="main-module-text">Emergency Alerts</text>
+    
+    <!-- Module 3: Data Security -->
+    <rect x="390" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="465" y="175" font-size="14" text-anchor="middle" class="main-module-text">Data Security</text>
+    
+    <!-- Module 4: User Onboarding -->
+    <rect x="550" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="625" y="175" font-size="14" text-anchor="middle" class="main-module-text">User Onboarding</text>
+    
+    <!-- Module 5: UI Layout -->
+    <rect x="710" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="785" y="175" font-size="14" text-anchor="middle" class="main-module-text">UI Layout</text>
+    
+    <!-- Module 6: Accessibility -->
+    <rect x="870" y="150" width="150" height="40" rx="0" ry="0" class="main-module" />
+    <text x="945" y="175" font-size="14" text-anchor="middle" class="main-module-text">Accessibility</text>
+  </g>
+
+  <!-- Arrows from Home to Main Modules -->
+  <line x1="530" y1="75" x2="530" y2="100" stroke="#333" stroke-width="1.5" />
+  
+  <!-- Arrows from Home to Main modules -->
+  <line x1="530" y1="100" x2="145" y2="100" stroke="#333" stroke-width="1.5" />
+  <line x1="530" y1="100" x2="305" y2="100" stroke="#333" stroke-width="1.5" />
+  <line x1="530" y1="100" x2="465" y2="100" stroke="#333" stroke-width="1.5" />
+  <line x1="530" y1="100" x2="625" y2="100" stroke="#333" stroke-width="1.5" />
+  <line x1="530" y1="100" x2="785" y2="100" stroke="#333" stroke-width="1.5" />
+  <line x1="530" y1="100" x2="945" y2="100" stroke="#333" stroke-width="1.5" />
+  
+  <!-- Vertical lines to modules -->
+  <line x1="145" y1="100" x2="145" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="305" y1="100" x2="305" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="465" y1="100" x2="465" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="625" y1="100" x2="625" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="785" y1="100" x2="785" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="945" y1="100" x2="945" y2="150" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)" />
+
+  <!-- Module 1: Health Dashboard - Submodules -->
+  <g id="module1-submodules">
+    <g id="tabs-header-1">
+      <rect x="70" y="220" width="150" height="25" rx="0" ry="0" class="special-box" fill="none" />
+      <text x="145" y="237" font-size="12" text-anchor="middle" font-weight="bold">SUBMODULES</text>
+    </g>
+    
+    <!-- Connecting line from module to tabs -->
+    <line x1="145" y1="190" x2="145" y2="220" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Submodule 1.1: Vitals Monitoring -->
+    <rect x="70" y="255" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="145" y="277" font-size="12" text-anchor="middle" class="submodule-text">Vitals Monitoring</text>
+    
+    <!-- Feature 1.1.1: Blood Pressure -->
+    <rect x="70" y="300" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="320" font-size="11" text-anchor="middle" class="feature-text">Blood Pressure Tracking</text>
+    
+    <!-- Feature 1.1.2: Heart Rate -->
+    <rect x="70" y="340" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="360" font-size="11" text-anchor="middle" class="feature-text">Heart Rate Monitoring</text>
+    
+    <!-- Submodule 1.2: Health Activity -->
+    <rect x="70" y="380" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="145" y="402" font-size="12" text-anchor="middle" class="submodule-text">Health Activity Tracking</text>
+    
+    <!-- Feature 1.2.1: Calories -->
+    <rect x="70" y="425" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="445" font-size="11" text-anchor="middle" class="feature-text">Calories Tracker</text>
+    
+    <!-- Feature 1.2.2: Water -->
+    <rect x="70" y="465" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="485" font-size="11" text-anchor="middle" class="feature-text">Water Intake Tracker</text>
+    
+    <!-- Submodule 1.3: Health Scoring -->
+    <rect x="70" y="505" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="145" y="527" font-size="12" text-anchor="middle" class="submodule-text">Health Scoring & Alerts</text>
+    
+    <!-- Feature 1.3.1: Daily Score -->
+    <rect x="70" y="550" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="570" font-size="11" text-anchor="middle" class="feature-text">Daily Health Score</text>
+    
+    <!-- Feature 1.3.2: Critical Alerts -->
+    <rect x="70" y="590" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="145" y="610" font-size="11" text-anchor="middle" class="feature-text">Critical Alert Emphasis</text>
+  </g>
+
+  <!-- Module 2: Emergency Alerts - Submodules -->
+  <g id="module2-submodules">
+    <g id="tabs-header-2">
+      <rect x="230" y="220" width="150" height="25" rx="0" ry="0" class="special-box" fill="none" />
+      <text x="305" y="237" font-size="12" text-anchor="middle" font-weight="bold">SUBMODULES</text>
+    </g>
+    
+    <!-- Connecting line from module to tabs -->
+    <line x1="305" y1="190" x2="305" y2="220" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Submodule 2.1: Event Detection -->
+    <rect x="230" y="255" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="305" y="277" font-size="12" text-anchor="middle" class="submodule-text">Event Detection</text>
+    
+    <!-- Feature 2.1.1: Health Monitoring -->
+    <rect x="230" y="300" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="320" font-size="11" text-anchor="middle" class="feature-text">Continuous Health Monitoring</text>
+    
+    <!-- Feature 2.1.2: Environmental Hazard -->
+    <rect x="230" y="340" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="360" font-size="11" text-anchor="middle" class="feature-text">Environmental Hazard Detection</text>
+    
+    <!-- Submodule 2.2: Alert Notification -->
+    <rect x="230" y="380" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="305" y="402" font-size="12" text-anchor="middle" class="submodule-text">Alert Notification</text>
+    
+    <!-- Feature 2.2.1: Multi-Channel -->
+    <rect x="230" y="425" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="445" font-size="11" text-anchor="middle" class="feature-text">Multi-Channel Notification</text>
+    
+    <!-- Feature 2.2.2: Recipient Prioritization -->
+    <rect x="230" y="465" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="485" font-size="11" text-anchor="middle" class="feature-text">Recipient Prioritization</text>
+    
+    <!-- Feature 2.2.3: Alert Acknowledgment -->
+    <rect x="230" y="505" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="525" font-size="11" text-anchor="middle" class="feature-text">Alert Acknowledgment</text>
+    
+    <!-- Submodule 2.3: User Configuration -->
+    <rect x="230" y="545" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="305" y="567" font-size="12" text-anchor="middle" class="submodule-text">User Configuration</text>
+    
+    <!-- Feature 2.3.1: Emergency Contacts -->
+    <rect x="230" y="590" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="610" font-size="11" text-anchor="middle" class="feature-text">Emergency Contact Management</text>
+    
+    <!-- Feature 2.3.2: Notification Preferences -->
+    <rect x="230" y="630" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="650" font-size="11" text-anchor="middle" class="feature-text">Notification Preferences</text>
+    
+    <!-- Feature 2.3.3: Device Integration -->
+    <rect x="230" y="670" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="690" font-size="11" text-anchor="middle" class="feature-text">Device Integration</text>
+    
+    <!-- Submodule 2.4: Security -->
+    <rect x="230" y="710" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="305" y="732" font-size="12" text-anchor="middle" class="submodule-text">Security & Data Integrity</text>
+    
+    <!-- Feature 2.4.1: Secure Transmission -->
+    <rect x="230" y="755" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="775" font-size="11" text-anchor="middle" class="feature-text">Secure Data Transmission</text>
+    
+    <!-- Feature 2.4.2: Authentication -->
+    <rect x="230" y="795" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="815" font-size="11" text-anchor="middle" class="feature-text">User Authentication</text>
+    
+    <!-- Feature 2.4.3: Audit Logging -->
+    <rect x="230" y="835" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="305" y="855" font-size="11" text-anchor="middle" class="feature-text">Audit Logging & Monitoring</text>
+  </g>
+
+  <!-- Module 3: Data Security - Submodules -->
+  <g id="module3-submodules">
+    <g id="tabs-header-3">
+      <rect x="390" y="220" width="150" height="25" rx="0" ry="0" class="special-box" fill="none" />
+      <text x="465" y="237" font-size="12" text-anchor="middle" font-weight="bold">SUBMODULES</text>
+    </g>
+    
+    <!-- Connecting line from module to tabs -->
+    <line x1="465" y1="190" x2="465" y2="220" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Submodule 3.1: Encryption Management -->
+    <rect x="390" y="255" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="465" y="277" font-size="12" text-anchor="middle" class="submodule-text">Encryption Management</text>
+    
+    <!-- Feature 3.1.1: End-to-End Encryption -->
+    <rect x="390" y="300" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="320" font-size="11" text-anchor="middle" class="feature-text">End-to-End Data Encryption</text>
+    
+    <!-- Feature 3.1.2: Encryption Key Management -->
+    <rect x="390" y="340" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="360" font-size="11" text-anchor="middle" class="feature-text">Encryption Key Management</text>
+    
+    <!-- Submodule 3.2: Secure API Integration -->
+    <rect x="390" y="380" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="465" y="402" font-size="12" text-anchor="middle" class="submodule-text">Secure API Integration</text>
+    
+    <!-- Feature 3.2.1: Authentication -->
+    <rect x="390" y="425" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="445" font-size="11" text-anchor="middle" class="feature-text">Authenticated API Access</text>
+    
+    <!-- Feature 3.2.2: Data Transmission -->
+    <rect x="390" y="465" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="485" font-size="11" text-anchor="middle" class="feature-text">Data Transmission Security</text>
+    
+    <!-- Submodule 3.3: Compliance -->
+    <rect x="390" y="505" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="465" y="527" font-size="12" text-anchor="middle" class="submodule-text">Compliance & Audit</text>
+    
+    <!-- Feature 3.3.1: HIPAA -->
+    <rect x="390" y="550" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="570" font-size="11" text-anchor="middle" class="feature-text">HIPAA Compliance</text>
+    
+    <!-- Feature 3.3.2: Audit Logging -->
+    <rect x="390" y="590" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="610" font-size="11" text-anchor="middle" class="feature-text">Audit Logging & Monitoring</text>
+    
+    <!-- Feature 3.3.3: Security Incident -->
+    <rect x="390" y="630" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="465" y="650" font-size="11" text-anchor="middle" class="feature-text">Security Incident Response</text>
+  </g>
+
+  <!-- Module 4: User Onboarding - Submodules -->
+  <g id="module4-submodules">
+    <g id="tabs-header-4">
+      <rect x="550" y="220" width="150" height="25" rx="0" ry="0" class="special-box" fill="none" />
+      <text x="625" y="237" font-size="12" text-anchor="middle" font-weight="bold">SUBMODULES</text>
+    </g>
+    
+    <!-- Connecting line from module to tabs -->
+    <line x1="625" y1="190" x2="625" y2="220" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Submodule 4.1: Account Creation -->
+    <rect x="550" y="255" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="625" y="277" font-size="12" text-anchor="middle" class="submodule-text">Account Creation</text>
+    
+    <!-- Feature 4.1.1: Registration -->
+    <rect x="550" y="300" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="320" font-size="11" text-anchor="middle" class="feature-text">Simplified Account Registration</text>
+    
+    <!-- Feature 4.1.2: Social Login -->
+    <rect x="550" y="340" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="360" font-size="11" text-anchor="middle" class="feature-text">Social Login Options</text>
+    
+    <!-- Submodule 4.2: Verification -->
+    <rect x="550" y="380" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="625" y="402" font-size="12" text-anchor="middle" class="submodule-text">Verification & Authentication</text>
+    
+    <!-- Feature 4.2.1: Verification Code -->
+    <rect x="550" y="425" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="445" font-size="11" text-anchor="middle" class="feature-text">Verification Code Entry</text>
+    
+    <!-- Feature 4.2.2: User Login -->
+    <rect x="550" y="465" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="485" font-size="11" text-anchor="middle" class="feature-text">User Login</text>
+    
+    <!-- Submodule 4.3: Password Management -->
+    <rect x="550" y="505" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="625" y="527" font-size="12" text-anchor="middle" class="submodule-text">Password Management</text>
+    
+    <!-- Feature 4.3.1: Password Reset Request -->
+    <rect x="550" y="550" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="570" font-size="11" text-anchor="middle" class="feature-text">Password Reset Request</text>
+    
+    <!-- Feature 4.3.2: Password Reset Execution -->
+    <rect x="550" y="590" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="610" font-size="11" text-anchor="middle" class="feature-text">Password Reset Execution</text>
+    
+    <!-- Submodule 4.4: Profile Setup -->
+    <rect x="550" y="630" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="625" y="652" font-size="12" text-anchor="middle" class="submodule-text">Profile Setup</text>
+    
+    <!-- Feature 4.4.1: Basic Profile -->
+    <rect x="550" y="675" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="625" y="695" font-size="11" text-anchor="middle" class="feature-text">Basic Profile Completion</text>
+  </g>
+
+  <!-- Module 5: UI Layout - Submodules -->
+  <g id="module5-submodules">
+    <g id="tabs-header-5">
+      <rect x="710" y="220" width="150" height="25" rx="0" ry="0" class="special-box" fill="none" />
+      <text x="785" y="237" font-size="12" text-anchor="middle" font-weight="bold">SUBMODULES</text>
+    </g>
+    
+    <!-- Connecting line from module to tabs -->
+    <line x1="785" y1="190" x2="785" y2="220" stroke="#333" stroke-width="1.5" />
+    
+    <!-- Submodule 5.1: Navigation Structure -->
+    <rect x="710" y="255" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="785" y="277" font-size="12" text-anchor="middle" class="submodule-text">Navigation Structure</text>
+    
+    <!-- Feature 5.1.1: Main Navigation -->
+    <rect x="710" y="300" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="320" font-size="11" text-anchor="middle" class="feature-text">Main Navigation Menu</text>
+    
+    <!-- Feature 5.1.2: Breadcrumbs -->
+    <rect x="710" y="340" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="360" font-size="11" text-anchor="middle" class="feature-text">Breadcrumb Navigation</text>
+    
+    <!-- Submodule 5.2: Screen Layout -->
+    <rect x="710" y="380" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="785" y="402" font-size="12" text-anchor="middle" class="submodule-text">Screen Layout</text>
+    
+    <!-- Feature 5.2.1: Profile Module -->
+    <rect x="710" y="425" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="445" font-size="11" text-anchor="middle" class="feature-text">Profile Module Layout</text>
+    
+    <!-- Feature 5.2.2: Health Reports -->
+    <rect x="710" y="465" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="485" font-size="11" text-anchor="middle" class="feature-text">Health Reports Visualization</text>
+    
+    <!-- Feature 5.2.3: Appointments List -->
+    <rect x="710" y="505" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="525" font-size="11" text-anchor="middle" class="feature-text">Appointments List Layout</text>
+    
+    <!-- Submodule 5.3: Interaction Flow -->
+    <rect x="710" y="545" width="150" height="35" rx="0" ry="0" class="submodule" />
+    <text x="785" y="567" font-size="12" text-anchor="middle" class="submodule-text">Interaction Flow</text>
+    
+    <!-- Feature 5.3.1: Progressive Disclosure -->
+    <rect x="710" y="590" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="610" font-size="11" text-anchor="middle" class="feature-text">Progressive Disclosure</text>
+    
+    <!-- Feature 5.3.2: Contextual Help -->
+    <rect x="710" y="630" width="150" height="30" rx="0" ry="0" class="feature" />
+    <text x="785" y="650" font-size="11" text-anchor="middle" class="feature-text">Contextual Help & Tips</text>

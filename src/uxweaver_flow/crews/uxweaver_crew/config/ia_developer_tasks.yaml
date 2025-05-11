@@ -1,13 +1,47 @@
 ia_developer_task:
   description: >
-    Generate a valid Mermaid diagram for Information Architecture,
-    based on the strategy output from the previous step. Ensure the syntax is error-free and ready for rendering.
-    input:
-      strategies: {strategies}
+    Generate a valid Mermaid diagram for Information Architecture, based on the dictionary output from the previous step. 
+    Ensure the syntax is error-free and ready for rendering.
+    Rules:
+
+    Use graph TD (top-down layout).
+
+    Use A[Label] --> B[Label] for connections.
+
+    Use A -->|action| B to label an edge.
+
+    Do not use |label|> (invalid).
+
+    All node IDs must be unique (A, B, C, etc.).
+
+    Include all major components (inputs, buttons, system actions, etc.).
+    input: {page}
+    input schema:
+              {
+          "components": [
+            {
+              "name": "String component name",
+              "description": "String describing the component’s purpose"
+            }
+          ],
+          "information_flow": {
+            "description": "String describing data exchange or dependencies",
+            "sequence": ["Array of steps or interactions between components"]
+          },
+        }
 
   expected_output: >
     Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
     Do not wrap the diagram in any symbols, tags, or extra characters. 
     Your output must begin directly with: graph TD
+    Example Output:
+      graph TD
+        A[Username Input] --> B[Password Input]
+        B --> C[Login Button]
+        C --> D[System checks credentials]
+        D -->|Valid| E[Redirect to Dashboard]
+        D -->|Invalid| F[Show Error Message]
+        C --> G[Forgot Password Link]
+        C --> H[Register Link]
 
   agent: ia_developer_agent
