@@ -1,47 +1,146 @@
+# ia_developer_task:
+#   description: >
+#     Generate a valid colour coded Mermaid diagram for Information Architecture, based on the dictionary output from the previous step. 
+#     Ensure the syntax is error-free and ready for rendering.
+#     Rules:
+
+#     Use graph TD (top-down layout).
+
+#     Use A[Label] --> B[Label] for connections.
+
+#     Use A -->|action| B to label an edge.
+
+#     Do not use |label|> (invalid).
+
+#     All node IDs must be unique (A, B, C, etc.).
+
+#     Include all major components (inputs, buttons, system actions, etc.).
+#     input: {page}
+#     input schema:
+#               {
+#           "components": [
+#             {
+#               "name": "String component name",
+#               "description": "String describing the component’s purpose"
+#             }
+#           ],
+#           "information_flow": {
+#             "description": "String describing data exchange or dependencies",
+#             "sequence": ["Array of steps or interactions between components"]
+#           },
+#         }
+
+#   expected_output: >
+#     Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
+#     Do not wrap the diagram in any symbols, tags, or extra characters. 
+#     Your output must begin directly with: graph TD
+#     Output Example 1:
+#       graph TD
+#         A[Username Input] --> B[Password Input]
+#         B --> C[Login Button]
+#         C --> D[System checks credentials]
+#         D -->|Valid| E[Redirect to Dashboard]
+#         D -->|Invalid| F[Show Error Message]
+#         C --> G[Forgot Password Link]
+#         C --> H[Register Link]
+
+
+#     Output Example 2:
+#       graph TD
+#         A[Task Title and Description Editor<br/><small>Inline editing with real-time validation and autosave</small>] --> B(Validation and Sync Engine<br/><small>Validates inputs, ensures data integrity, triggers notifications, syncs changes</small>)
+#         C[Due Date Selector<br/><small>Calendar input with validation to prevent past dates</small>] --> B
+#         D[Reminder Configuration Panel<br/><small>Set multiple reminders with custom timing and notification triggers</small>] --> B
+#         E[Priority Selector<br/><small>Assign priority levels to tasks</small>] --> B
+#         F[Subtasks Manager<br/><small>Add, modify, reorder, and mark subtasks complete</small>] --> B
+
+#         B --> G[Task Data Model<br/><small>Updates with validated data from engine</small>]
+#         G --> H[Notification Scheduling<br/><small>Triggers notifications if applicable</small>]
+#         G --> I[Task Overview UI<br/><small>Real-time updates reflecting latest task state without page reload</small>]
+
+#         %% Sequence edges with actions
+#         A -->|User edits task title or description| B
+#         C -->|User selects due date| B
+#         D -->|User configures reminders| B
+#         E -->|User assigns priority| B
+#         F -->|User manages subtasks| B
+
+#         B -->|Validation triggers| G
+#         G -->|Schedule notifications| H
+#         G -->|Sync changes| I
+#         I -->|UI updates| I
+
+#         %% Colors for clarity using style (not all renderers support, but keep syntax for color coding)
+#         style A fill:#f9f,stroke:#333,stroke-width:1px
+#         style C fill:#bbf,stroke:#333,stroke-width:1px
+#         style D fill:#fbf,stroke:#333,stroke-width:1px
+#         style E fill:#bfb,stroke:#333,stroke-width:1px
+#         style F fill:#ffb,stroke:#333,stroke-width:1px
+#         style B fill:#f96,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+#         style G fill:#6fc,stroke:#333,stroke-width:2px
+#         style H fill:#fc6,stroke:#333,stroke-width:2px
+#         style I fill:#6cf,stroke:#333,stroke-width:2px"
+
+#   agent: ia_developer_agent
+
+
 ia_developer_task:
   description: >
-    Generate a valid Mermaid diagram for Information Architecture, based on the dictionary output from the previous step. 
-    Ensure the syntax is error-free and ready for rendering.
-    Rules:
+    Generate a **Streamlit-compatible**, **valid**, and **color-coded** Mermaid diagram representing the Information Architecture for a given page, using a dictionary input structure.
 
-    Use graph TD (top-down layout).
+    ❗ Output must follow these critical rules:
+    - Use `graph TD` (top-down flowchart layout)
+    - Use only valid Mermaid syntax: no HTML (`<br/>`, `<small>`, etc.), only use `\n` for line breaks inside labels.
+    - Use `A[Label] --> B[Label]` format for nodes and connections.
+    - Edge labels must use `A -->|label| B`, never `|label|>`.
+    - Node IDs must be unique (A, B, C, etc.).
+    - No Markdown, backticks, or code fences — just plain text Mermaid syntax starting with `graph TD`.
 
-    Use A[Label] --> B[Label] for connections.
+    ✅ Every node must:
+    - Represent a UI component or a backend/system function
+    - Include a short description separated by `\n`, like `A["Title\nSubtitle"]`
 
-    Use A -->|action| B to label an edge.
+    ✅ Styling:
+    - Use `style` commands for visual clarity (colors, stroke)
+    - You may use different fill colors per node category (input, button, backend, etc.)
 
-    Do not use |label|> (invalid).
+    ⚠️ Mermaid must be renderable in Streamlit’s `st_mermaid()` — if any part of the syntax is invalid, the diagram will fail.
 
-    All node IDs must be unique (A, B, C, etc.).
-
-    Include all major components (inputs, buttons, system actions, etc.).
     input: {page}
     input schema:
-              {
-          "components": [
-            {
-              "name": "String component name",
-              "description": "String describing the component’s purpose"
-            }
-          ],
-          "information_flow": {
-            "description": "String describing data exchange or dependencies",
-            "sequence": ["Array of steps or interactions between components"]
-          },
+      {
+        "components": [
+          {
+            "name": "String component name",
+            "description": "String describing the component’s purpose"
+          }
+        ],
+        "information_flow": {
+          "description": "String describing data exchange or dependencies",
+          "sequence": ["Array of steps or interactions between components"]
         }
+      }
 
   expected_output: >
-    Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
-    Do not wrap the diagram in any symbols, tags, or extra characters. 
-    Your output must begin directly with: graph TD
-    Example Output:
-      graph TD
-        A[Username Input] --> B[Password Input]
-        B --> C[Login Button]
-        C --> D[System checks credentials]
-        D -->|Valid| E[Redirect to Dashboard]
-        D -->|Invalid| F[Show Error Message]
-        C --> G[Forgot Password Link]
-        C --> H[Register Link]
+    Output ONLY the raw Mermaid diagram — no markdown, no explanations, no extra characters.
+    Your output must start with: `graph TD` and follow with diagram lines only.
 
+    Example:
+      graph TD
+        A["Username Input\nAllows secure username entry"] --> B["Password Input\nMasked input for passwords"]
+        B --> C["Login Button\nSubmits credentials"]
+        C --> D["Authentication System\nValidates credentials"]
+        D -->|Valid| E["Redirect to Dashboard"]
+        D -->|Invalid| F["Show Error Message"]
+
+        %% Styling
+        style A fill:#bbdefb,stroke:#333,stroke-width:1px
+        style B fill:#c8e6c9,stroke:#333,stroke-width:1px
+        style C fill:#ffc107,stroke:#333,stroke-width:1px
+        style D fill:#ffe082,stroke:#333,stroke-width:2px
+        style E fill:#81c784,stroke:#333,stroke-width:2px
+        style F fill:#ef9a9a,stroke:#333,stroke-width:2px
   agent: ia_developer_agent
+
+
+
+

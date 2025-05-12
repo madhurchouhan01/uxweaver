@@ -1,22 +1,144 @@
+# uf_developer_task:
+#   description: >
+#     Generate a **Streamlit-compatible**, **valid**, and **color-coded** Mermaid diagram representing the **Information Architecture of the entire application**.
+
+#     The input is a merged dictionary of **all pages' components and their information flows**. Your job is to unify and synthesize this into a single, coherent diagram showing the relationships between all UI components and system functions across the app.
+
+#     ❗ Follow these strict rules:
+#     - Use `graph TD` (top-down layout)
+#     - Use only valid Mermaid syntax (no HTML tags like `<br/>`, `<small>`, etc.)
+#     - Use `\n` for line breaks inside node labels
+#     - All edges: `A[Label] --> B[Label]` or `A -->|label| B` — never use `|label|>`
+#     - All node IDs must be unique across the entire diagram
+#     - No Markdown, backticks, or code fencing — output should be plain Mermaid starting with `graph TD`
+
+#     ✅ Every node must:
+#     - Represent a UI component or a backend/system function
+#     - Include a clear label and description separated by `\n`, like `A["Username Input\nAllows secure entry"]`
+
+#     ✅ Use `style` tags for color-coding:
+#     - Inputs: light blue (`#bbdefb`)
+#     - Buttons/actions: amber (`#ffc107`)
+#     - Backend/system: yellow (`#ffe082`)
+#     - Feedback/notifications: green (`#81c784`)
+#     - Errors/failures: red (`#ef9a9a`)
+#     - Use stroke and width for emphasis
+
+#     input: {pages}
+#     input schema:
+#       {
+#         "components": [
+#           {
+#             "name": "String component name",
+#             "description": "String describing the component’s purpose"
+#           }
+#         ],
+#         "information_flow": {
+#           "description": "String describing combined data exchange or dependencies",
+#           "sequence": ["Array of interactions across all pages"]
+#         }
+#       }
+
+#   expected_output: >
+#     Output ONLY the raw Mermaid diagram content.
+#     It must begin directly with: `graph TD`
+
+#     Example:
+#       graph TD
+#         A["Username Input\nAllows secure entry"] --> B["Password Input\nMasked"]
+#         B --> C["Login Button\nTriggers login"]
+#         C --> D["Auth System\nVerifies credentials"]
+#         D -->|Success| E["Dashboard\nDisplays user content"]
+#         D -->|Failure| F["Error Message\nInvalid login"]
+
+#         %% Style nodes
+#         style A fill:#bbdefb,stroke:#333,stroke-width:1px
+#         style B fill:#bbdefb,stroke:#333,stroke-width:1px
+#         style C fill:#ffc107,stroke:#333,stroke-width:2px
+#         style D fill:#ffe082,stroke:#333,stroke-width:2px
+#         style E fill:#81c784,stroke:#333,stroke-width:2px
+#         style F fill:#ef9a9a,stroke:#333,stroke-width:2px
+
+#   agent: uf_developer_agent
+
+
 uf_developer_task:
   description: >
-    Combine and Generate a valid Mermaid diagram for information architecture,based on the mermaids provided. 
-    Ensure the syntax is error-free and ready for rendering.
-    input:
-      mermaids: {mermaids}
-      metadata : {metadata}
-      example input :
+    Generate a **Streamlit-compatible**, **valid**, and **color-coded** Mermaid diagram representing the **entire application's Information Architecture**, following a strict **level-wise hierarchy**.
+
+    🎯 Structure the diagram in four levels:
+    - **Level 0:** Application title (project root)
+    - **Level 1:** Core page titles (e.g., Dashboard, Profile, Settings)
+    - **Level 2:** Submodules within each page
+    - **Level 3:** Components within each submodule
+
+    ❗ Follow these strict syntax rules:
+    - Use `graph TD` (top-down layout)
+    - All nodes must use `A[Label]`, or `A["Label\nSubtitle"]` (use `\n` for line breaks)
+    - Use `A --> B` for links, and `A -->|action| B` to label edges
+    - Node IDs (A, B, C...) must be globally unique across the entire diagram
+    - No HTML (`<br/>`, `<small>`, etc.), no Markdown, no code blocks — just raw Mermaid starting with `graph TD`
+
+    ✅ Node Labeling:
+    - Every node must represent a logical unit: the app, a page, a submodule, or a component
+    - Descriptive labels with `\n` to improve readability, e.g. `A["Login Button\nTriggers authentication"]`
+
+    ✅ Color Code:
+    - Inputs: `#bbdefb`
+    - Buttons/Actions: `#ffc107`
+    - Backend/System Functions: `#ffe082`
+    - Feedback/Notifications: `#81c784`
+    - Errors: `#ef9a9a`
+    - Pages and Submodules: use `#e1bee7` (lavender) and `#d1c4e9` (light violet) for clear hierarchy
+    - Use `style` with stroke and width for emphasis
+
+    input: {pages}
+    input schema:
+      {
+        "app_title": "String representing application title",
+        "core_pages": [
           {
-    "page_0": "graph TD\n  A[Username Input Field] --> B[Password Input Field]\n  B --> C[Login Button]\n  C --> D[System validates credentials]\n  D -->|Valid credentials| E[System authenticates user]\n  E --> F[System redirects to task list page]\n  D -->|Invalid credentials| G[Error Message Display]\n  C --> H[Forgot Password Link]\n  C --> I[Registration Link]",
-    
-    "page_1": "graph TD\n  A[Task Title Input] --> B[Task Description Input]\n  B --> C[Due Date Picker]\n  C --> D[Assignee Selector]\n  D --> E[Priority Level Selector]\n  E --> F[Task Form]\n  F -->|Submit| G[System validates input data]\n  G -->|Valid| H[System saves task to database]\n  H --> I[System updates Task List]\n  I --> J[User views updated Task List]\n  G -->|Invalid| K[Show Error Message]\n  A --> L[Task List]\n  L --> M[User selects task to view details]\n  M --> N[User views task details]\n  C -->|Selected Date| P[System formats due date]\n  P --> Q[System saves due date]\n  D -->|Selected Assignee| R[System assigns task]\n  R --> S[System notifies assignee]\n  E -->|Selected Priority| T[System sets priority level]\n  T --> U[System updates task priority]",
-    
-    "page_2": "graph TD\n  A[User loads Profile View page] --> B[System displays Profile Header and Details]\n  B --> C[User navigates to Task Overview]\n  C --> D[System displays Task Overview]\n  D --> E[User navigates to Task List]\n  E --> F[System displays Task List]\n  C -->|Back| B\n  E -->|Back| B\n  A1[Profile Header] --> B\n  A2[Profile Details] --> B\n  B1[Task Overview] --> D\n  B2[Task List] --> F"
-    }
+            "page_title": "Page Name",
+            "submodules": [
+              {
+                "submodule_title": "Submodule name",
+                "components": [
+                  {
+                    "name": "Component name",
+                    "description": "Purpose or role of the component"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
   expected_output: >
-    Output ONLY the raw Mermaid diagram content — no backticks, no "mermaid" tag, no markdown formatting. 
-    Do not wrap the diagram in any symbols, tags, or extra characters. 
-    Your output must begin directly with: graph TD
-    
+    Output ONLY the raw Mermaid code — no Markdown, no explanations, no tags. It must begin directly with: `graph TD`
+
+    Example:
+      graph TD
+        A["MyApp\nApplication Root"] --> B["Login Page"]
+        A --> C["Dashboard"]
+        B --> D["Login Panel"]
+        D --> E["Username Field\nCaptures user ID"]
+        D --> F["Password Field\nSecures password input"]
+        D --> G["Login Button\nTriggers authentication"]
+        G --> H["Auth System\nValidates credentials"]
+        H -->|Success| I["User Dashboard\nDisplays content"]
+        H -->|Failure| J["Error Message\nInvalid credentials"]
+
+        %% Style
+        style A fill:#d1c4e9,stroke:#333,stroke-width:3px
+        style B fill:#e1bee7,stroke:#333,stroke-width:2px
+        style C fill:#e1bee7,stroke:#333,stroke-width:2px
+        style D fill:#d1c4e9,stroke:#333,stroke-width:2px
+        style E fill:#bbdefb,stroke:#333,stroke-width:1px
+        style F fill:#bbdefb,stroke:#333,stroke-width:1px
+        style G fill:#ffc107,stroke:#333,stroke-width:1px
+        style H fill:#ffe082,stroke:#333,stroke-width:1px
+        style I fill:#81c784,stroke:#333,stroke-width:1px
+        style J fill:#ef9a9a,stroke:#333,stroke-width:1px
 
   agent: uf_developer_agent

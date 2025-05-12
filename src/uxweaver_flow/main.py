@@ -6,6 +6,7 @@ import json
 from PIL import Image
 import io
 import sys
+import os
 from pydantic import BaseModel
 from crewai.flow import Flow, listen, start
 from typing import List
@@ -16,10 +17,44 @@ from crews.uxweaver_crew.instructions_crew import (
     UFDeveloperCrew,
     Demo
 )
+import google.generativeai as genai
 from tools.extract_conversation_from_slack import find_chats_from_json
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# Configure Google Generative AI with API key
+# In production, use environment variables for API keys
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyAiKsAg5rMeMluMi2khVbzTunKbTEeaoCo")
+genai.configure(api_key=GEMINI_API_KEY)
+ 
+# Initialize the Gemini vision model
+gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+ 
+def analyze_image_with_gemini(image, text_context=""):
+    """Process image using Google's Gemini model with text context"""
+    # Prompt for image analysis
+    prompt = """
+    You are UXWeaver, an AI agent embedded within the FeatureFlow platform. Your goal is to assist UX designers by transforming visual input into structured UX artifacts.
+    Please analyze this image (sketch/whiteboard/mockup) and extract:
+    1. User goals: What users want to accomplish
+    2. Pain points: User frustrations, blockers, or inefficiencies
+    3. Tasks: Actions or workflows users are trying to complete
+    4. System actions: How the system responds to user behavior
+    5. UX structure: Navigation, screens, sections, flows
+    Additional context from text requirements is provided below (if any):
+    {text_context}
+    Format your response as structured insights that can be integrated with other UX requirements.
+    """
+    formatted_prompt = prompt.format(text_context=text_context)
+    try:
+        # Generate response from the model
+        response = gemini_model.generate_content([formatted_prompt, image])
+        return response.text
+    except Exception as e:
+        return f"Error analyzing image: {str(e)}"
+
+
 
 st.set_page_config(page_title="UXWeaver – Requirement Flow")
 st.title("📐 UXWeaver – Convert Requirements to Diagrams")
@@ -52,9 +87,23 @@ if input_json is not None:
         st.error(f"Error reading JSON: {e}")
 
 input_image = st.file_uploader("🖼️ **Upload Image**", type=["png", "jpg", "jpeg"])
-# -- Image placeholder (no OCR implemented yet)
+
+image_analysis_result = ""
+ 
 if input_image is not None:
-    combined_input += "\n[Image uploaded but OCR is not implemented]"
+    # Display the uploaded image
+    image = Image.open(input_image)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
+    # Process the image with Gemini
+    with st.spinner("Analyzing image with AI..."):
+        # Pass current text context to help with image analysis
+        image_analysis_result = analyze_image_with_gemini(image, input_text)
+        st.info("✅ Image analyzed successfully")
+    # Display image analysis results
+    st.subheader("Image Analysis Results")
+    st.write(image_analysis_result)
+    # Add image analysis to combined input
+    combined_input += "\n\nImage Analysis Results:\n" + image_analysis_result
 
 if not combined_input.strip():
     st.error("🚨 Please provide at least one form of input: Text, PDF, JSON, or Image.")
@@ -98,16 +147,15 @@ class MainFlow(Flow[RequirementState]):
     @listen(get_inputs)
     def management(self):   
         with st.spinner(text="🧠 Generating Pages/Modules..."):
-            time.sleep(2)
-        result = (
-            ManagerCrew()
-            .crew()
-            .kickoff(inputs={"requirements": self.state.requirements})
-        )
-        print(type(result.raw))
-        print(result.raw)
-        
-        self.state.manager_ouput = json.loads(result.raw)
+            result = (
+                ManagerCrew()
+                .crew()
+                .kickoff(inputs={"requirements": self.state.requirements})
+            )
+            print(type(result.raw))
+            print(result.raw)
+            
+            self.state.manager_ouput = json.loads(result.raw)
         print("Json type in manager : ", type(self.state.manager_ouput))
         GlobalState.gbl_instructions = result.raw
         st.success("Pages created!")
@@ -116,21 +164,19 @@ class MainFlow(Flow[RequirementState]):
     @listen(management)
     def team_leader(self):
         with st.spinner("📋 Generating Page Components/Sub Modules..."):
-            time.sleep(3)
-        
-        # Convert each page into a separate dictionary with page_info key
-        pages_as_dicts = [{"page_info": page} for page in self.state.manager_ouput["core_pages"]]
-        page_count = 0
-        for page in self.state.manager_ouput["core_pages"]:
-            pages_as_dicts = {"page_info": page}
+            # Convert each page into a separate dictionary with page_info key
+            pages_as_dicts = [{"page_info": page} for page in self.state.manager_ouput["core_pages"]]
+            page_count = 0
+            for page in self.state.manager_ouput["core_pages"]:
+                pages_as_dicts = {"page_info": page}
 
-            output = (
-                TeamLeaderCrew()
-                .crew()
-                .kickoff(inputs=pages_as_dicts)
-            )
-            self.state.pages[f"page_{page_count}"] = json.loads(output.raw)
-            page_count += 1
+                output = (
+                    TeamLeaderCrew()
+                    .crew()
+                    .kickoff(inputs=pages_as_dicts)
+                )
+                self.state.pages[f"page_{page_count}"] = json.loads(output.raw)
+                page_count += 1
       
         st.success("Sub Modules generated!")    
         st.json(self.state.pages,expanded=2)
@@ -149,18 +195,45 @@ class MainFlow(Flow[RequirementState]):
             page_title = page_name["page_title"]
             with st.spinner(f"🎨 Generating Mermaid for {page_title}..."):
                 time.sleep(4)
-            st.success(page_title)
-            try : 
-                st_mermaid(result.raw, show_controls=False)
-            except Exception as e:
-                st.error("Something went wrong while generating Mermaid", icon="😪")
-            page_count += 1
-        self.state.ia_mermaids = page_components
+                st.success(page_title)
+                try: 
+                    st_mermaid(result.raw, show_controls=False)
+                except Exception as e:
+                    st.error(f"Something went wrong while generating Mermaid {e}", icon="😪")
+
+                page_count += 1
+            self.state.ia_mermaids = page_components
         st.write(self.state.ia_mermaids)
 
     @listen(team_leader)
     def uf_developer(self):
-        print("hello world")
+        all_pages = []
+        for (page_id, page_content), page_name in zip(self.state.pages.items(), self.state.manager_ouput["core_pages"]):
+            all_pages.append({
+                "page_title": page_name["page_title"],
+                "components": page_content["components"],
+                "information_flow": page_content["information_flow"]
+            })
+           
+        with st.spinner("🧩 Generating Unified Mermaid Diagram for the full application..."):
+            result = (
+                UFDeveloperCrew()
+                .crew()
+                .kickoff(inputs={"pages": all_pages})
+            )
+            self.state.ia_mermaids = {"full_app": result.raw}
+            try:
+                st_mermaid(result.raw, show_controls=False)
+                st.success("✅ Unified Information Architecture Diagram Rendered!")
+            except Exception as e:
+                st.error(f"Mermaid rendering failed: {e}", icon="😪")
+
+        st.write(self.state.ia_mermaids)
+
+       
+    # @listen(team_leader)
+    # def uf_developer(self):
+    #     print("hello world")
         # st.info("🎨 Generating Mermaid for UserFlow Diagram...")
         # result = (
         #     UFDeveloperCrew()
